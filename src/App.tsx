@@ -1,13 +1,26 @@
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import pMinDelay from 'p-min-delay';
 import Header from './quickstart-router-basics/components/Header';
-import Home from './quickstart-router-basics/pages/Home';
-import About from './quickstart-router-basics/pages/About';
-import Members from './quickstart-router-basics/pages/Members';
-import SongList from './quickstart-router-basics/pages/SongList';
-import { useState } from 'react';
-import Player from './quickstart-router-basics/pages/songs/Player';
-import SongIndex from './quickstart-router-basics/pages/songs/Index';
-import NotFound from './quickstart-router-basics/components/NotFound';
+import Loading from './quickstart-router-basics/components/Loading';
+
+const Home = React.lazy(() => pMinDelay(import('./quickstart-router-basics/pages/Home'), 1000));
+const About = React.lazy(() => pMinDelay(import('./quickstart-router-basics/pages/About'), 1000));
+const Members = React.lazy(() =>
+  pMinDelay(import('./quickstart-router-basics/pages/Members'), 1000),
+);
+const SongList = React.lazy(() =>
+  pMinDelay(import('./quickstart-router-basics/pages/SongList'), 1000),
+);
+const Player = React.lazy(() =>
+  pMinDelay(import('./quickstart-router-basics/pages/songs/Player'), 1000),
+);
+const SongIndex = React.lazy(() =>
+  pMinDelay(import('./quickstart-router-basics/pages/songs/Index'), 1000),
+);
+const NotFound = React.lazy(() =>
+  pMinDelay(import('./quickstart-router-basics/components/NotFound'), 1000),
+);
 
 export type MemberType = {
   name: string;
@@ -48,28 +61,30 @@ const App = () => {
   ]);
 
   return (
-    <Router>
-      <div className='container'>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Navigate to='/home' />} />
-          <Route path='/home' element={<Home />}>
-            Home
-          </Route>
-          <Route path='/about' element={<About title={'여우와 늙다리들'} />}>
-            About
-          </Route>
-          <Route path='/members' element={<Members members={members} />}>
-            Members
-          </Route>
-          <Route path='/songs' element={<SongList songs={songs} />}>
-            <Route index element={<SongIndex />} />
-            <Route path=':id' element={<Player />} />
-          </Route>
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </div>
-    </Router>
+    <React.Suspense fallback={<Loading />}>
+      <Router>
+        <div className='container'>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Navigate to='/home' />} />
+            <Route path='/home' element={<Home />}>
+              Home
+            </Route>
+            <Route path='/about' element={<About title={'여우와 늙다리들'} />}>
+              About
+            </Route>
+            <Route path='/members' element={<Members members={members} />}>
+              Members
+            </Route>
+            <Route path='/songs' element={<SongList songs={songs} />}>
+              <Route index element={<SongIndex />} />
+              <Route path=':id' element={<Player />} />
+            </Route>
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </React.Suspense>
   );
 };
 
