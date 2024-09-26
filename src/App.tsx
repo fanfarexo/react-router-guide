@@ -6,6 +6,7 @@ import Members from './quickstart-router-basics/pages/Members';
 import SongList from './quickstart-router-basics/pages/SongList';
 import { useState } from 'react';
 import Player from './quickstart-router-basics/pages/songs/Player';
+import SongIndex from './quickstart-router-basics/pages/songs/Index';
 
 export type MemberType = {
   name: string;
@@ -60,6 +61,7 @@ const App = () => {
             Members
           </Route>
           <Route path='/songs' element={<SongList songs={songs} />}>
+            <Route index element={<SongIndex />} />
             <Route path=':id' element={<Player songs={songs} />} />
           </Route>
         </Routes>
