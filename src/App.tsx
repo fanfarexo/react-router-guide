@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './quickstart-router-basics/components/Header';
 import Home from './quickstart-router-basics/pages/Home';
 import About from './quickstart-router-basics/pages/About';
@@ -7,6 +7,7 @@ import SongList from './quickstart-router-basics/pages/SongList';
 import { useState } from 'react';
 import Player from './quickstart-router-basics/pages/songs/Player';
 import SongIndex from './quickstart-router-basics/pages/songs/Index';
+import NotFound from './quickstart-router-basics/components/NotFound';
 
 export type MemberType = {
   name: string;
@@ -51,7 +52,8 @@ const App = () => {
       <div className='container'>
         <Header />
         <Routes>
-          <Route path='/' element={<Home />}>
+          <Route path='/' element={<Navigate to='/home' />} />
+          <Route path='/home' element={<Home />}>
             Home
           </Route>
           <Route path='/about' element={<About title={'여우와 늙다리들'} />}>
@@ -64,6 +66,7 @@ const App = () => {
             <Route index element={<SongIndex />} />
             <Route path=':id' element={<Player />} />
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
     </Router>
