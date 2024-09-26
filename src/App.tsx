@@ -62,7 +62,7 @@ const App = () => {
           </Route>
           <Route path='/songs' element={<SongList songs={songs} />}>
             <Route index element={<SongIndex />} />
-            <Route path=':id' element={<Player songs={songs} />} />
+            <Route path=':id' element={<Player />} />
           </Route>
         </Routes>
       </div>

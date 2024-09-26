@@ -1,12 +1,13 @@
 import YouTube from 'react-youtube';
 import { SongType } from '../../../App';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-type Props = { songs: SongType[] };
 type SongIdParam = { id: string };
+type ContextType = { songs: SongType[] };
 
-const Player = (props: Props) => {
+const Player = () => {
+  const { songs } = useOutletContext<ContextType>();
   const params = useParams<SongIdParam>();
   const navigate = useNavigate();
   const [title, setTitle] = useState<string>('');
@@ -14,14 +15,14 @@ const Player = (props: Props) => {
 
   useEffect(() => {
     const id = params.id ? parseInt(params.id, 10) : 0;
-    const song = props.songs.find((song) => song.id === id);
+    const song = songs.find((song) => song.id === id);
     if (song) {
       setTitle(song.title ? song.title : '');
       setYoutubeLink(song.youtube_link ? song.youtube_link : '');
     } else {
       navigate('/songs');
     }
-  }, [navigate, params.id, props.songs]);
+  }, [navigate, params.id, songs]);
 
   return (
     <div className='modal'>
