@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { SongType } from '../../App';
+import { SongType } from '../App';
 import { useEffect, useState } from 'react';
 
 type Props = {

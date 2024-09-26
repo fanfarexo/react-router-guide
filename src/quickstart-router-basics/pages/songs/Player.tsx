@@ -1,5 +1,5 @@
 import YouTube from 'react-youtube';
-import { SongType } from '../../../App';
+import { SongType } from '../../App';
 import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { MemberType } from '../../App';
+import { MemberType } from '../App';
 
 type Props = { members: MemberType[] };
 

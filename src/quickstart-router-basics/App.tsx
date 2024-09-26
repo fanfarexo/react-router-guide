@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import pMinDelay from 'p-min-delay';
-import Header from './quickstart-router-basics/components/Header';
-import Loading from './quickstart-router-basics/components/Loading';
+import Header from './components/Header';
+import Loading from './components/Loading';
 
-const Home = React.lazy(() => pMinDelay(import('./quickstart-router-basics/pages/Home'), 1000));
-const About = React.lazy(() => pMinDelay(import('./quickstart-router-basics/pages/About'), 1000));
-const Members = React.lazy(() =>
-  pMinDelay(import('./quickstart-router-basics/pages/Members'), 1000),
-);
-const SongList = React.lazy(() =>
-  pMinDelay(import('./quickstart-router-basics/pages/SongList'), 1000),
-);
-const Player = React.lazy(() =>
-  pMinDelay(import('./quickstart-router-basics/pages/songs/Player'), 1000),
-);
-const SongIndex = React.lazy(() =>
-  pMinDelay(import('./quickstart-router-basics/pages/songs/Index'), 1000),
-);
-const NotFound = React.lazy(() =>
-  pMinDelay(import('./quickstart-router-basics/components/NotFound'), 1000),
-);
+const Home = React.lazy(() => pMinDelay(import('./pages/Home'), 1000));
+const About = React.lazy(() => pMinDelay(import('./pages/About'), 1000));
+const Members = React.lazy(() => pMinDelay(import('./pages/Members'), 1000));
+const SongList = React.lazy(() => pMinDelay(import('./pages/SongList'), 1000));
+const Player = React.lazy(() => pMinDelay(import('./pages/songs/Player'), 1000));
+const SongIndex = React.lazy(() => pMinDelay(import('./pages/songs/Index'), 1000));
+const NotFound = React.lazy(() => pMinDelay(import('./components/NotFound'), 1000));
 
 export type MemberType = {
   name: string;

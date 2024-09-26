@@ -1,5 +1,5 @@
 import { Link, Outlet, useMatch } from 'react-router-dom';
-import { SongType } from '../../App';
+import { SongType } from '../App';
 
 type Props = {
   songs: SongType[];
